@@ -20,14 +20,14 @@ pip instal -r requirements.txt
 
 ### workflow
 
-update config.yaml
-update secret.yaml [optional]
-update params.yaml
-update entity
-update configuration manager in src config
-update components
-update pipeline
-update main.py 
-uodate dvc.yaml
-update app.py
+1. update config.yaml
+2. update secret.yaml [optional]
+3. update params.yaml
+4. update entity
+5. update configuration manager in src config
+6. update components
+7. update pipeline
+8. update main.py 
+9. udate dvc.yaml
+10. update app.py
 
