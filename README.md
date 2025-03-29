@@ -18,5 +18,16 @@ conda activate ML
 '''' Bash 
 pip instal -r requirements.txt 
 
+### workflow
 
+update config.yaml
+update secret.yaml [optional]
+update params.yaml
+update entity
+update configuration manager in src config
+update components
+update pipeline
+update main.py 
+uodate dvc.yaml
+update app.py
 
