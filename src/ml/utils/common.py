@@ -1,20 +1,21 @@
 import os
 from box.exceptions import BoxError
 import yaml
-from src.ml import logger
+from ml import logger
 import json
 import joblib
-from box import configbox, ConfigBox
+from box import ConfigBox
 from pathlib import Path
 from typing import Any
 import base64
-from ensure import ensure_annotations
+from pydantic import validate_call
 from box.exceptions import BoxValueError
 
 
 
-@ensure_annotations
-def read_yaml(path_to_yaml: str) -> ConfigBox:
+
+@validate_call
+def read_yaml(path: str) -> ConfigBox:
     """
     Reads a YAML file and returns its content as a ConfigBox object.
 
@@ -44,7 +45,7 @@ def read_yaml(path_to_yaml: str) -> ConfigBox:
     
 
 
-@ensure_annotations
+@validate_call
 def create_directories(path_to_directories: list, verbose=True):
     """
     Create list of  directories 
@@ -60,8 +61,8 @@ def create_directories(path_to_directories: list, verbose=True):
 
 
 
-@ensure_annotations
-def  save_jason(path_to_json: str, data: dict) :
+@validate_call
+def  save_json(path_to_json: str, data: dict) :
     """
     Save json data to file
  
@@ -71,11 +72,11 @@ def  save_jason(path_to_json: str, data: dict) :
     """
     with open(path_to_json, 'w') as f:
         json.dump(data, f, indent=4)
-        logger.info(f"json file saved at: {path}")
+        logger.info(f"json file saved at: {path_to_json}")
         
 
-@ensure_annotations
-def load_json(path: str) -> configbox:
+@validate_call
+def load_json(path: str) -> ConfigBox:
     """
     load json files data 
 
@@ -83,16 +84,16 @@ def load_json(path: str) -> configbox:
         path (path): Path to the json file
 
     Returns:
-        configbox: data as class attribution instead of dict
+        ConfigBox: data as class attribution instead of dict
     """
 
     with open(path) as f:
         content = json.load(f)
         logger.info(f"json file loaded successfully from: {path}")
-        return configbox(content)
+        return ConfigBox(content)
     
 
-@ensure_annotations
+@validate_call
 def save_bin(data: Any, path: str):
 
     """
@@ -102,12 +103,12 @@ def save_bin(data: Any, path: str):
         data (Any): Data to be saved as binary
         path (path): Path to the binary file
     """
-    joblib.dump(value data,  filename path)
+    joblib.dump(value=data, filename=path)
     logger.info(f" binary  file saved  at: {path}")
 
 
-@ensure_annotations
-def load_bin(path:path) -> Any:
+@validate_call
+def load_bin(path: Path) -> Any:
     """
     Load binary data 
 
@@ -123,7 +124,7 @@ def load_bin(path:path) -> Any:
 
 
 
-@ensure_annotations
+@validate_call
 def get_size(path: str) -> str:
     """
     Get size in KB
